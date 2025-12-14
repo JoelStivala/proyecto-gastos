@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using backend.DTOs.GastoDTOs;
+using backend.Mappers;
 using backend.Models;
 using backend.Repositories.GastoRepository;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +30,7 @@ namespace backend.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById([FromRoute]int id)
+        public async Task<IActionResult> GetById([FromRoute] int id)
         {
             var gasto = await _gastoRepo.GetByIdAsync(id);
 
@@ -36,6 +38,16 @@ namespace backend.Controllers
                 return NotFound();
 
             return Ok(gasto);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] CreateGastoDTO createGastoDTO)
+        {
+            var gasto = createGastoDTO.ToGastoFromCreateDTO();
+
+            await _gastoRepo.CreateAsync(gasto);
+
+            return CreatedAtAction(nameof(GetById), new {id = gasto.Id}, gasto.ToGastoDTO());
         }
     }
 }
