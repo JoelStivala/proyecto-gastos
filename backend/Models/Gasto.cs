@@ -9,7 +9,7 @@ namespace backend.Models
     {
         public int Id { get; set; }
         public string Nombre { get; set; } = string.Empty;
-        public string Descripcion { get; set; } = string.Empty;
+        public string Observaciones { get; set; } = string.Empty;
         public decimal Importe { get; set; }
         public DateTime Fecha { get; set; }
     }

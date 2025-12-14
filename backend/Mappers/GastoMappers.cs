@@ -14,8 +14,10 @@ namespace backend.Mappers
             return new GetGastoDTO
             {
                 Id = gasto.Id,
-                Descripcion = gasto.Descripcion,
-                Importe = gasto.Importe
+                Nombre = gasto.Nombre,
+                Observaciones = gasto.Observaciones,
+                Importe = gasto.Importe,
+                Fecha = gasto.Fecha
             };
         }
 
@@ -23,8 +25,10 @@ namespace backend.Mappers
         {
             return new Gasto
             {
-                Descripcion = createDTO.Descripcion,
-                Importe = createDTO.Importe
+                Nombre = createDTO.Nombre,
+                Observaciones = createDTO.Observaciones,
+                Importe = createDTO.Importe,
+                Fecha = createDTO.Fecha
             };
         } 
     }
