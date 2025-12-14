@@ -26,5 +26,16 @@ namespace backend.Controllers
 
             return Ok(gastos);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById([FromRoute]int id)
+        {
+            var gasto = await _gastoRepo.GetByIdAsync(id);
+
+            if(gasto == null)
+                return NotFound();
+
+            return Ok(gasto);
+        }
     }
 }
