@@ -7,6 +7,7 @@ using backend.Mappers;
 using backend.Models;
 using backend.Repositories.GastoRepository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ActionConstraints;
 
 namespace backend.Controllers
 {
@@ -48,6 +49,17 @@ namespace backend.Controllers
             await _gastoRepo.CreateAsync(gasto);
 
             return CreatedAtAction(nameof(GetById), new {id = gasto.Id}, gasto.ToGastoDTO());
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            var gasto = await _gastoRepo.DeleteAsync(id);
+
+            if(gasto == null)
+                return NotFound();
+
+            return NoContent();
         }
 
         [HttpPut("{id}")]
