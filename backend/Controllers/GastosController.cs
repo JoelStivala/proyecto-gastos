@@ -49,5 +49,16 @@ namespace backend.Controllers
 
             return CreatedAtAction(nameof(GetById), new {id = gasto.Id}, gasto.ToGastoDTO());
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateGastoDTO updateGastoDTO)
+        {
+            var gasto = await _gastoRepo.UpdateAsync(id, updateGastoDTO);
+
+            if(gasto == null)
+                return NotFound();
+
+            return Ok(gasto.ToGastoDTO());
+        }
     }
 }
