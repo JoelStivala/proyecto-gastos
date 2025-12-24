@@ -12,5 +12,8 @@ namespace backend.Models
         public string Observaciones { get; set; } = string.Empty;
         public decimal Importe { get; set; }
         public DateTime Fecha { get; set; }
+
+        public int IdCategoria { get; set; }
+        public Categoria Categoria { get; set; } = null!;
     }
 }
